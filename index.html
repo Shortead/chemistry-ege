@@ -1,0 +1,917 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f4f5ef">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Химия ЕГЭ">
+  <title>Тривиальные названия веществ — ЕГЭ по химии</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --canvas: #f3f4ee;
+      --surface: #fbfcf8;
+      --header: #f8f9f3;
+      --ink: #1b2d25;
+      --muted: #51645a;
+      --line: #dce4da;
+      --track: #e4ebe2;
+      --accent: #155841;
+      --accent-hover: #104631;
+      --on-accent: #fff;
+      --soft: #e5eee5;
+      --card-a: #e8f2e4;
+      --card-b: #d7e8d8;
+      --card-back-a: #f0f4de;
+      --card-back-b: #e4edcd;
+      --card-line: #cbdcc9;
+      --card-ink: #173c2e;
+      --card-muted: #3e6150;
+      --review: #754c2a;
+      --review-bg: #f5e9da;
+      --review-line: #e9d4b9;
+      --focus: #247a5d;
+      --shadow: 0 8px 28px rgba(42, 75, 54, .07);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    }
+
+    :root[data-color="dark"] {
+      color-scheme: dark;
+      --canvas: #12201b;
+      --surface: #192923;
+      --header: #15241d;
+      --ink: #edf4eb;
+      --muted: #b3c4b9;
+      --line: #33473c;
+      --track: #304539;
+      --accent: #aee0bf;
+      --accent-hover: #c4ecd0;
+      --on-accent: #143426;
+      --soft: #273d31;
+      --card-a: #223d31;
+      --card-b: #2c4c3c;
+      --card-back-a: #293c2c;
+      --card-back-b: #37482e;
+      --card-line: #466456;
+      --card-ink: #f2f7eb;
+      --card-muted: #c6d9ca;
+      --review: #f0ccaa;
+      --review-bg: #3d2d22;
+      --review-line: #644834;
+      --focus: #b4edca;
+      --shadow: 0 8px 28px rgba(6, 18, 13, .2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { min-width: 0; }
+    body { margin: 0; background: var(--canvas); color: var(--ink); min-height: 100vh; min-height: 100dvh; }
+    button, input { font: inherit; }
+    button { color: inherit; cursor: pointer; touch-action: manipulation; }
+    button:disabled { cursor: default; }
+    button:focus-visible, summary:focus-visible, input:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+    button, summary, label { -webkit-tap-highlight-color: transparent; }
+    h1, h2, p { margin: 0; }
+    .frame {
+      width: 100%;
+      max-width: 1112px;
+      margin-inline: auto;
+      padding-left: max(16px, env(safe-area-inset-left));
+      padding-right: max(16px, env(safe-area-inset-right));
+    }
+    .masthead {
+      padding-top: env(safe-area-inset-top);
+      border-bottom: 1px solid var(--line);
+      background: var(--header);
+    }
+    .topbar { min-height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 750; }
+    .brand-mark { position: relative; display: inline-block; width: 32px; height: 32px; border-radius: 10px; background: var(--accent); }
+    .brand-mark i, .brand-mark::before, .brand-mark::after {
+      content: ""; position: absolute; left: 7px; top: 11px; width: 18px; height: 10px; border: 1px solid var(--on-accent); border-radius: 50%;
+    }
+    .brand-mark::before { transform: rotate(60deg); }
+    .brand-mark::after { transform: rotate(-60deg); }
+    .theme-button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-width: 78px; min-height: 44px;
+      padding-inline: 10px; background: transparent; border: 1px solid var(--line); border-radius: 12px;
+      font-size: 12px; font-weight: 700;
+    }
+    .theme-icon { width: 13px; height: 13px; border: 1.5px solid currentColor; border-radius: 50%; background: linear-gradient(90deg, currentColor 50%, transparent 50%); }
+    .main { padding-top: 21px; padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+    .intro { margin-bottom: 19px; }
+    .intro h1 { max-width: 100%; font-size: clamp(1.65rem, 6.9vw, 3rem); line-height: 1.06; letter-spacing: -.045em; overflow-wrap: anywhere; text-wrap: balance; }
+    .intro p { margin-top: 8px; color: var(--muted); font-size: 14px; }
+    .workspace { display: grid; gap: 12px; align-items: start; }
+    .workspace > * { min-width: 0; }
+    .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; }
+    .settings summary {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 48px;
+      padding: 9px 14px; list-style: none; cursor: pointer; font-size: 14px; font-weight: 750; border-radius: 15px;
+    }
+    .settings summary::-webkit-details-marker { display: none; }
+    .chevron { flex: none; width: 8px; height: 8px; margin: 0 3px 4px; border: solid var(--muted); border-width: 0 1.5px 1.5px 0; transform: rotate(45deg); }
+    [open] > summary .chevron { transform: translateY(4px) rotate(225deg); }
+    #settings-form { border-top: 1px solid var(--line); padding: 12px 13px 13px; }
+    fieldset { margin: 0 0 11px; padding: 0; border: 0; min-width: 0; }
+    legend { padding: 0; margin-bottom: 3px; color: var(--muted); font-size: 12px; font-weight: 750; }
+    fieldset label {
+      display: flex; align-items: center; gap: 9px; min-height: 44px; padding: 3px 4px;
+      font-size: 13px; line-height: 1.27; cursor: pointer; border-radius: 8px;
+    }
+    fieldset input { appearance: none; flex: 0 0 18px; width: 18px; height: 18px; margin: 0; background: var(--surface); border: 1.5px solid var(--muted); border-radius: 5px; display: grid; place-items: center; }
+    fieldset input[type="radio"] { border-radius: 50%; }
+    fieldset input:checked { border-color: var(--accent); background: var(--accent); }
+    fieldset input:checked::after { content: ""; width: 9px; height: 5px; border: solid var(--on-accent); border-width: 0 0 2px 2px; transform: translateY(-1px) rotate(-45deg); }
+    fieldset input[type="radio"]:checked::after { width: 6px; height: 6px; border: 0; border-radius: 50%; background: var(--on-accent); transform: none; }
+    fieldset label:has(input:checked) { background: var(--soft); }
+    fieldset label + label { margin-top: 2px; }
+    .sections { position: relative; }
+    .sections legend { min-height: 20px; padding-right: 86px; }
+    .sections .select-all { position: absolute; top: -35px; right: 0; min-height: 44px; padding-inline: 3px; font-size: 12px; }
+    .section-name { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+    .section-count { flex: none; color: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; padding-right: 3px; }
+    .button {
+      min-height: 50px; border: 1px solid transparent; border-radius: 13px; padding: 8px 13px;
+      font-size: 15px; line-height: 1.2; font-weight: 750;
+    }
+    .apply { width: 100%; background: var(--accent); color: var(--on-accent); }
+    .apply span { display: inline-block; margin-left: 5px; font-size: 12px; font-variant-numeric: tabular-nums; }
+    .apply:disabled { opacity: .6; }
+    .text-button { min-height: 44px; border: 0; padding: 4px 0; background: transparent; color: var(--muted); font-size: 13px; font-weight: 700; }
+    .progress { padding: 10px 13px 11px; margin-bottom: 11px; }
+    .metrics { display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 8px; text-align: center; }
+    .metric { min-width: 0; }
+    .metric + .metric { border-left: 1px solid var(--line); }
+    .metric span { display: block; font-size: 11px; line-height: 1.2; font-weight: 650; color: var(--muted); }
+    .metric strong { display: block; margin-top: 3px; font-size: 18px; line-height: 1.12; font-variant-numeric: tabular-nums; }
+    .score-known strong { color: var(--accent); }
+    .score-review strong { color: var(--review); }
+    progress {
+      display: block; width: 100%; height: 5px; margin-top: 10px; border: 0; border-radius: 10px; overflow: hidden;
+      background: var(--track); accent-color: var(--accent); color: var(--accent);
+    }
+    progress::-webkit-progress-bar { background: var(--track); border-radius: 10px; }
+    progress::-webkit-progress-value { background: var(--accent); border-radius: 10px; }
+    progress::-moz-progress-bar { background: var(--accent); border-radius: 10px; }
+    .card {
+      display: block; width: 100%; padding: 0; border: 0; border-radius: 23px; background: transparent;
+      color: var(--card-ink); text-align: center; perspective: 1200px; box-shadow: var(--shadow);
+    }
+    .card-inner { display: grid; width: 100%; min-width: 0; transform-style: preserve-3d; }
+    .card.is-animated > .card-inner { transition: transform 390ms cubic-bezier(.25,.66,.25,1); }
+    .card.is-open > .card-inner { transform: rotateY(180deg); }
+    .face {
+      position: relative; isolation: isolate; grid-area: 1 / 1; min-width: 0; min-height: 256px; overflow: hidden;
+      padding: 13px 15px 11px; display: grid; grid-template-rows: auto 1fr auto; gap: 9px;
+      background: linear-gradient(146deg, var(--card-a), var(--card-b)); border: 1px solid var(--card-line); border-radius: 23px;
+      -webkit-backface-visibility: hidden; backface-visibility: hidden;
+    }
+    .face::before {
+      content: ""; position: absolute; z-index: -1; width: 164px; height: 164px; right: -56px; bottom: -76px;
+      border: 1px solid var(--card-line); border-radius: 50%;
+      box-shadow: 0 0 0 13px var(--card-a), 0 0 0 14px var(--card-line), 0 0 0 28px var(--card-a), 0 0 0 29px var(--card-line);
+      opacity: .66;
+    }
+    .face-back { transform: rotateY(180deg); background: linear-gradient(146deg, var(--card-back-a), var(--card-back-b)); }
+    .face-top {
+      display: flex; justify-content: space-between; align-items: start; gap: 8px;
+      text-align: left; color: var(--card-muted); font-size: 11px; line-height: 1.3; font-weight: 750;
+    }
+    .category { min-width: 0; overflow-wrap: anywhere; }
+    .direction-label { flex: none; max-width: 46%; text-align: right; }
+    .face-content { display: flex; flex-direction: column; gap: 8px; justify-content: center; align-items: center; min-width: 0; padding-block: 8px; }
+    .card-value {
+      display: block; max-width: 100%; font-size: clamp(1.65rem, 8.2vw, 3.55rem);
+      line-height: 1.05; font-weight: 780; letter-spacing: -.045em; overflow-wrap: anywhere; text-wrap: balance;
+    }
+    .card-value.is-formula { font-size: clamp(1.8rem, 9vw, 3.9rem); letter-spacing: -.025em; line-height: 1.16; }
+    .card-value.is-long-formula { font-size: clamp(1.13rem, 5.8vw, 2.5rem); letter-spacing: -.018em; }
+    .face-back .card-value:not(.is-formula) { font-size: clamp(1.48rem, 7vw, 3.15rem); }
+    .card-reference, .note, .clue {
+      display: block; max-width: 100%; font-size: 13px; line-height: 1.35; color: var(--card-muted); overflow-wrap: anywhere; text-wrap: pretty;
+    }
+    .card-reference { font-weight: 750; }
+    .note { font-size: 14px; }
+    .clue { max-width: 32ch; }
+    .face-action { display: flex; align-items: center; justify-content: center; gap: 6px; color: var(--card-muted); font-size: 12px; font-weight: 700; }
+    .flip-symbol { font-size: 18px; line-height: 1; }
+    .grade { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 11px; }
+    .grade .button { min-height: 55px; }
+    .grade .button span { margin-right: 2px; }
+    .known { background: var(--accent); color: var(--on-accent); }
+    .review { background: var(--review-bg); color: var(--review); border-color: var(--review-line); }
+    .secondary { background: var(--soft); border-color: var(--line); color: var(--ink); }
+    .grade .button:disabled { background: var(--surface); border-color: var(--line); color: var(--muted); opacity: .74; }
+    .study-footer { min-height: 44px; display: flex; justify-content: space-between; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; }
+    .back { flex: none; }
+    .back span { margin-right: 3px; }
+    .back:disabled { opacity: .65; }
+    .footer {
+      display: flex; align-items: center; flex-wrap: wrap; gap: 0 12px; padding-top: 2px; border-top: 1px solid var(--line);
+      color: var(--muted); font-size: 12px;
+    }
+    .footer span { padding-block: 6px; }
+    #reset { margin-left: auto; }
+    .outcome { padding: 27px 15px; min-height: 256px; display: grid; align-content: center; justify-items: center; gap: 12px; text-align: center; }
+    .outcome-icon { display: grid; place-items: center; background: var(--soft); color: var(--accent); width: 45px; height: 45px; border-radius: 50%; font-size: 23px; font-weight: 750; }
+    .outcome h2 { font-size: clamp(1.36rem, 5vw, 1.85rem); line-height: 1.12; letter-spacing: -.025em; }
+    .outcome p { font-size: 14px; line-height: 1.45; color: var(--muted); max-width: 36ch; }
+    .outcome-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+    @media (hover: hover) {
+      button:not(:disabled):hover, summary:hover { filter: brightness(.96); }
+      .known:not(:disabled):hover, .apply:not(:disabled):hover { background: var(--accent-hover); }
+      fieldset label:hover { background: var(--soft); }
+    }
+    @media (min-width: 580px) {
+      .frame { padding-left: max(24px, env(safe-area-inset-left)); padding-right: max(24px, env(safe-area-inset-right)); }
+      .intro { margin-bottom: 23px; }
+      .intro h1 { text-wrap: initial; }
+      .face { min-height: 300px; padding: 17px 24px 14px; }
+      .face-top { font-size: 13px; }
+      .card-reference, .note, .clue { font-size: 15px; }
+    }
+    @media (min-width: 820px) {
+      .topbar { min-height: 69px; }
+      .main { padding-top: 37px; }
+      .intro { margin-bottom: 28px; }
+      .intro p { font-size: 15px; }
+      .workspace { grid-template-columns: minmax(0, 1fr) minmax(275px, 31%); gap: 20px; }
+      .settings { grid-area: 1 / 2; }
+      .study { grid-area: 1 / 1; }
+      .face { min-height: 365px; }
+      .grade .button { min-height: 59px; }
+      .sections legend { margin-bottom: 5px; }
+      .footer { margin-top: 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .card.is-animated > .card-inner { transition: none; }
+    }
+    /* Stable face switching across Safari, including local Files previews. */
+    .card { perspective: none; }
+    .card-inner { display: block; transform: none !important; transition: none !important; }
+    .face { display: grid; transform: none !important; -webkit-backface-visibility: visible; backface-visibility: visible; }
+    .face-back { display: none; }
+    .card.is-open .face-front { display: none; }
+    .card.is-open .face-back { display: grid; }
+  </style>
+</head>
+<body>
+  <header class="masthead">
+    <div class="frame topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true"><i></i></span>ЕГЭ по химии</div>
+      <button class="theme-button" id="theme" type="button" disabled>
+        <span class="theme-icon" aria-hidden="true"></span><span id="theme-label">Авто</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="frame main">
+    <div class="intro">
+      <h1>Тривиальные названия веществ</h1>
+      <p id="catalog-count"></p>
+    </div>
+
+    <section class="outcome panel" id="startup-error" role="alert" aria-labelledby="startup-title">
+      <h2 id="startup-title">Не удалось запустить тренажёр</h2>
+      <p>Обновите страницу. Если сообщение повторится, проверьте, включён ли JavaScript, и откройте страницу в Safari или Chrome.</p>
+    </section>
+
+    <div id="trainer" hidden>
+    <div class="workspace">
+      <details class="settings panel" id="settings">
+        <summary>
+          <span>Параметры колоды</span>
+          <span class="chevron" aria-hidden="true"></span>
+        </summary>
+        <form id="settings-form">
+          <fieldset class="direction">
+            <legend>Режим</legend>
+            <label><input type="radio" name="direction" value="name"><span>Название → формула</span></label>
+            <label><input type="radio" name="direction" value="formula"><span>Формула → название</span></label>
+            <label><input type="radio" name="direction" value="mixed"><span>Смешанный</span></label>
+          </fieldset>
+          <fieldset class="filters">
+            <legend>Порядок и отбор</legend>
+            <label><input type="checkbox" id="shuffle"><span>Случайный порядок</span></label>
+            <label><input type="checkbox" id="only-unknown"><span>Только «Не знаю»</span></label>
+          </fieldset>
+          <fieldset class="sections">
+            <legend>Тематические разделы</legend>
+            <button class="text-button select-all" id="select-all" type="button">Снять выбор</button>
+            <div id="category-options"></div>
+          </fieldset>
+          <button class="button apply" id="apply" type="submit">Начать колоду <span id="deck-count"></span></button>
+        </form>
+      </details>
+
+      <section class="study" aria-label="Карточки">
+        <div class="progress panel">
+          <div class="metrics">
+            <div class="metric"><span>Карточка</span><strong id="position">—</strong></div>
+            <div class="metric score-known"><span>Знаю</span><strong id="correct">0</strong></div>
+            <div class="metric score-review"><span>Ошибки</span><strong id="incorrect">0</strong></div>
+          </div>
+          <progress id="progress-bar" value="0" max="1" aria-label="Доля оценённых карточек"></progress>
+        </div>
+
+        <div id="active">
+          <button class="card" id="card" type="button" aria-pressed="false">
+            <span class="card-inner">
+              <span class="face face-front" id="front">
+                <span class="face-top">
+                  <span class="category" id="category-front"></span>
+                  <span class="direction-label" id="direction-front"></span>
+                </span>
+                <span class="face-content">
+                  <span class="card-value" id="question"></span>
+                  <span class="clue" id="clue" hidden></span>
+                </span>
+                <span class="face-action"><span class="flip-symbol" aria-hidden="true">⤾</span> Показать ответ</span>
+              </span>
+              <span class="face face-back" id="reverse" aria-hidden="true">
+                <span class="face-top">
+                  <span class="category" id="category-back"></span>
+                  <span class="direction-label">Ответ</span>
+                </span>
+                <span class="face-content">
+                  <span class="card-reference" id="reference"></span>
+                  <span class="card-value" id="answer"></span>
+                  <span class="note" id="note"></span>
+                </span>
+                <span class="face-action"><span class="flip-symbol" aria-hidden="true">⤾</span> К вопросу</span>
+              </span>
+            </span>
+          </button>
+          <div class="grade">
+            <button class="button known" id="known" type="button" disabled><span aria-hidden="true">✓</span> Знаю</button>
+            <button class="button review" id="review" type="button" disabled><span aria-hidden="true">↻</span> Повторить</button>
+          </div>
+        </div>
+
+        <div class="outcome panel" id="complete" hidden>
+          <span class="outcome-icon" aria-hidden="true">✓</span>
+          <h2>Колода пройдена</h2>
+          <p id="summary"></p>
+          <div class="outcome-actions">
+            <button class="button known" id="errors" type="button" hidden>Повторить ошибки</button>
+            <button class="button secondary" id="restart" type="button">Начать заново</button>
+          </div>
+        </div>
+        <div class="outcome panel" id="empty" hidden>
+          <h2>В колоде пока нет карточек</h2>
+          <p id="empty-copy"></p>
+          <button class="button known" id="show-all" type="button">Показать все карточки</button>
+        </div>
+        <div class="study-footer">
+          <button class="text-button back" id="back" type="button" disabled><span aria-hidden="true">←</span> Назад</button>
+          <span id="deck-label"></span>
+        </div>
+        <span class="sr-only" id="announcement" role="status"></span>
+      </section>
+    </div>
+
+    <footer class="footer">
+      <span id="storage-status" role="status">Прогресс хранится на этом устройстве</span>
+      <span id="offline-status" hidden>Офлайн доступен</span>
+      <button class="text-button" id="reset" type="button">Сбросить прогресс</button>
+    </footer>
+    </div>
+  </main>
+
+  <script type="application/json" id="source-data">
+  {
+    "categories": ["Оксиды, газы и простые вещества", "Кислоты, основания, растворы", "Соли, удобрения и кристаллогидраты", "Минералы и природные материалы", "Органические вещества: углеводороды и производные", "Органические вещества: спирты, кислоты и прочее", "Полимеры и материалы"],
+    "cards": [
+      {"id": "1.1", "category": 1, "name": "Угарный газ", "formula": "CO", "note": "Оксид углерода(II)"},
+      {"id": "1.2", "category": 1, "name": "Углекислый газ", "formula": "CO₂", "note": "Оксид углерода(IV)"},
+      {"id": "1.3", "category": 1, "name": "Сухой лёд", "formula": "CO₂ (тв.)", "note": "Твёрдый диоксид углерода"},
+      {"id": "1.4", "category": 1, "name": "Сернистый газ", "formula": "SO₂", "note": "Оксид серы(IV)"},
+      {"id": "1.5", "category": 1, "name": "Серный ангидрид", "formula": "SO₃", "note": "Оксид серы(VI)"},
+      {"id": "1.6", "category": 1, "name": "Бурый газ", "formula": "NO₂", "note": "Оксид азота(IV)"},
+      {"id": "1.7", "category": 1, "name": "Веселящий газ", "formula": "N₂O", "note": "Оксид азота(I)"},
+      {"id": "1.8", "category": 1, "name": "Кремнезём, кварц", "formula": "SiO₂", "note": "Диоксид кремния"},
+      {"id": "1.9", "category": 1, "name": "Глинозём, корунд", "formula": "Al₂O₃", "note": "Оксид алюминия"},
+      {"id": "1.10", "category": 1, "name": "Железная окалина (магнетит)", "formula": "Fe₃O₄", "note": "Оксид железа(II,III)"},
+      {"id": "1.11", "category": 1, "name": "Пиролюзит", "formula": "MnO₂", "note": "Оксид марганца(IV)"},
+      {"id": "1.12", "category": 1, "name": "Негашёная известь", "formula": "CaO", "note": "Оксид кальция"},
+      {"id": "1.13", "category": 1, "name": "Вода", "formula": "H₂O", "note": "Оксид водорода"},
+      {"id": "1.14", "category": 1, "name": "Перекись водорода", "formula": "H₂O₂", "note": "Пероксид водорода"},
+      {"id": "1.15", "category": 1, "name": "Озон", "formula": "O₃", "note": "Аллотропная форма кислорода"},
+      {"id": "1.16", "category": 1, "name": "Белый фосфор", "formula": "P₄", "note": "Молекулярный фосфор (аллотропная форма)"},
+      {"id": "1.17", "category": 1, "name": "Графит, алмаз", "formula": "C", "note": "Аллотропные формы углерода"},
+      {"id": "2.1", "category": 2, "name": "Едкий натр, каустическая сода", "formula": "NaOH", "note": "Гидроксид натрия"},
+      {"id": "2.2", "category": 2, "name": "Едкое кали", "formula": "KOH", "note": "Гидроксид калия"},
+      {"id": "2.3", "category": 2, "name": "Гашёная известь", "formula": "Ca(OH)₂", "note": "Гидроксид кальция"},
+      {"id": "2.4", "category": 2, "name": "Известковая вода", "formula": "Ca(OH)₂ (р-р)", "note": "Водный раствор гидроксида кальция"},
+      {"id": "2.5", "category": 2, "name": "Известковое молоко", "formula": "Ca(OH)₂ (взвесь)", "note": "Суспензия гидроксида кальция"},
+      {"id": "2.6", "category": 2, "name": "Баритовая вода", "formula": "Ba(OH)₂ (р-р)", "note": "Раствор гидроксида бария"},
+      {"id": "2.7", "category": 2, "name": "Нашатырный спирт", "formula": "NH₃ (водн. р-р)", "note": "Водный раствор аммиака"},
+      {"id": "2.8", "category": 2, "name": "Соляная кислота", "formula": "HCl (водн. р-р)", "note": "Водный раствор хлороводорода"},
+      {"id": "2.9", "category": 2, "name": "Плавиковая кислота", "formula": "HF (водн. р-р)", "note": "Водный раствор фтороводорода"},
+      {"id": "2.10", "category": 2, "name": "Синильная кислота", "formula": "HCN", "note": "Циановодородная кислота"},
+      {"id": "2.11", "category": 2, "name": "Купоросное масло", "formula": "H₂SO₄ (конц.)", "note": "Концентрированная серная кислота"},
+      {"id": "2.12", "category": 2, "name": "Олеум", "formula": "SO₃ в H₂SO₄", "note": "Раствор триоксида серы в серной кислоте"},
+      {"id": "2.13", "category": 2, "name": "Царская водка", "formula": "HCl + HNO₃", "note": "Смесь конц. кислот, обычно 3:1 по объёму"},
+      {"id": "2.14", "category": 2, "name": "Угольная кислота", "formula": "H₂CO₃", "note": "Неустойчивая угольная кислота"},
+      {"id": "2.15", "category": 2, "name": "Борная кислота", "formula": "H₃BO₃", "note": "Ортоборная кислота"},
+      {"id": "3.1", "category": 3, "name": "Поваренная, каменная соль", "formula": "NaCl", "note": "Хлорид натрия"},
+      {"id": "3.2", "category": 3, "name": "Пищевая, питьевая сода", "formula": "NaHCO₃", "note": "Гидрокарбонат натрия"},
+      {"id": "3.3", "category": 3, "name": "Кальцинированная сода", "formula": "Na₂CO₃", "note": "Карбонат натрия"},
+      {"id": "3.4", "category": 3, "name": "Кристаллическая сода", "formula": "Na₂CO₃·10H₂O", "note": "Декагидрат карбоната натрия"},
+      {"id": "3.5", "category": 3, "name": "Поташ", "formula": "K₂CO₃", "note": "Карбонат калия"},
+      {"id": "3.6", "category": 3, "name": "Бертолетова соль", "formula": "KClO₃", "note": "Хлорат калия"},
+      {"id": "3.7", "category": 3, "name": "Хлорная известь", "formula": "Ca(OCl)Cl", "note": "Хлорид-гипохлорит кальция; техн. смесь"},
+      {"id": "3.8", "category": 3, "name": "Нашатырь", "formula": "NH₄Cl", "note": "Хлорид аммония"},
+      {"id": "3.9", "category": 3, "name": "Аммиачная селитра", "formula": "NH₄NO₃", "note": "Нитрат аммония"},
+      {"id": "3.10", "category": 3, "name": "Калийная селитра", "formula": "KNO₃", "note": "Нитрат калия"},
+      {"id": "3.11", "category": 3, "name": "Натриевая, чилийская селитра", "formula": "NaNO₃", "note": "Нитрат натрия"},
+      {"id": "3.12", "category": 3, "name": "Кальциевая селитра", "formula": "Ca(NO₃)₂", "note": "Нитрат кальция"},
+      {"id": "3.13", "category": 3, "name": "Ляпис", "formula": "AgNO₃", "note": "Нитрат серебра"},
+      {"id": "3.14", "category": 3, "name": "Медный купорос", "formula": "CuSO₄·5H₂O", "note": "Пентагидрат сульфата меди(II)"},
+      {"id": "3.15", "category": 3, "name": "Железный купорос", "formula": "FeSO₄·7H₂O", "note": "Гептагидрат сульфата железа(II)"},
+      {"id": "3.16", "category": 3, "name": "Цинковый купорос", "formula": "ZnSO₄·7H₂O", "note": "Гептагидрат сульфата цинка"},
+      {"id": "3.17", "category": 3, "name": "Глауберова соль", "formula": "Na₂SO₄·10H₂O", "note": "Декагидрат сульфата натрия"},
+      {"id": "3.18", "category": 3, "name": "Английская соль", "formula": "MgSO₄·7H₂O", "note": "Гептагидрат сульфата магния"},
+      {"id": "3.19", "category": 3, "name": "Гипс", "formula": "CaSO₄·2H₂O", "note": "Дигидрат сульфата кальция"},
+      {"id": "3.20", "category": 3, "name": "Алебастр (строительный)", "formula": "2CaSO₄·H₂O", "note": "Полугидрат сульфата кальция"},
+      {"id": "3.21", "category": 3, "name": "Медянка (в значении ацетата меди)", "formula": "Cu(CH₃COO)₂·H₂O", "note": "Моногидрат ацетата меди(II); термин неоднозначен"},
+      {"id": "3.22", "category": 3, "name": "Марганцовка", "formula": "KMnO₄", "note": "Перманганат калия"},
+      {"id": "3.23", "category": 3, "name": "Хромпик калиевый", "formula": "K₂Cr₂O₇", "note": "Дихромат калия"},
+      {"id": "3.24", "category": 3, "name": "Хромпик натриевый", "formula": "Na₂Cr₂O₇", "note": "Дихромат натрия"},
+      {"id": "3.25", "category": 3, "name": "Жёлтая кровяная соль", "formula": "K₄[Fe(CN)₆]·3H₂O", "note": "Тригидрат гексацианоферрата(II) калия"},
+      {"id": "3.26", "category": 3, "name": "Красная кровяная соль", "formula": "K₃[Fe(CN)₆]", "note": "Гексацианоферрат(III) калия"},
+      {"id": "3.27", "category": 3, "name": "Криолит", "formula": "Na₃AlF₆", "note": "Гексафторалюминат натрия"},
+      {"id": "3.28", "category": 3, "name": "Бура", "formula": "Na₂B₄O₇·10H₂O", "note": "Декагидрат тетрабората натрия"},
+      {"id": "3.29", "category": 3, "name": "Двойной суперфосфат", "formula": "Ca(H₂PO₄)₂·H₂O", "note": "Моногидрат дигидрофосфата кальция (осн. компонент)"},
+      {"id": "3.30", "category": 3, "name": "Простой суперфосфат", "formula": "Ca(H₂PO₄)₂ + CaSO₄", "note": "Удобрение: смесь фосфата и сульфата кальция"},
+      {"id": "4.1", "category": 4, "name": "Мел, мрамор, известняк", "formula": "CaCO₃", "note": "Карбонат кальция (материалы разной природы)"},
+      {"id": "4.2", "category": 4, "name": "Малахит", "formula": "Cu₂CO₃(OH)₂", "note": "Основной карбонат меди(II)"},
+      {"id": "4.3", "category": 4, "name": "Азурит", "formula": "Cu₃(CO₃)₂(OH)₂", "note": "Основной карбонат меди(II)"},
+      {"id": "4.4", "category": 4, "name": "Пирит, железный колчедан", "formula": "FeS₂", "note": "Дисульфид железа"},
+      {"id": "4.5", "category": 4, "name": "Галенит, свинцовый блеск", "formula": "PbS", "note": "Сульфид свинца(II)"},
+      {"id": "4.6", "category": 4, "name": "Сфалерит, цинковая обманка", "formula": "ZnS", "note": "Сульфид цинка"},
+      {"id": "4.7", "category": 4, "name": "Киноварь", "formula": "HgS", "note": "Сульфид ртути(II)"},
+      {"id": "4.8", "category": 4, "name": "Гематит, красный железняк", "formula": "Fe₂O₃", "note": "Оксид железа(III)"},
+      {"id": "4.9", "category": 4, "name": "Магнетит, магнитный железняк", "formula": "Fe₃O₄", "note": "Оксид железа(II,III)"},
+      {"id": "4.10", "category": 4, "name": "Боксит", "formula": "Смесь", "note": "Алюминиевая руда: гидроксиды/оксигидроксиды Al"},
+      {"id": "4.11", "category": 4, "name": "Апатит (фторапатит)", "formula": "Ca₅(PO₄)₃F", "note": "Фосфат кальция с фторид-ионом"},
+      {"id": "4.12", "category": 4, "name": "Фосфорит", "formula": "≈Ca₃(PO₄)₂", "note": "Природная фосфатная порода; состав варьирует"},
+      {"id": "4.13", "category": 4, "name": "Доломит", "formula": "CaMg(CO₃)₂", "note": "Карбонат кальция и магния"},
+      {"id": "4.14", "category": 4, "name": "Карборунд", "formula": "SiC", "note": "Карбид кремния"},
+      {"id": "4.15", "category": 4, "name": "Плавиковый шпат, флюорит", "formula": "CaF₂", "note": "Фторид кальция"},
+      {"id": "4.16", "category": 4, "name": "Сильвин", "formula": "KCl", "note": "Хлорид калия"},
+      {"id": "4.17", "category": 4, "name": "Сильвинит", "formula": "NaCl + KCl", "note": "Природная смесь солей"},
+      {"id": "4.18", "category": 4, "name": "Ржавчина", "formula": "Смесь", "note": "Гидратированные оксиды/оксигидроксиды железа"},
+      {"id": "5.1", "category": 5, "name": "Метан, болотный газ", "formula": "CH₄", "note": "Метан"},
+      {"id": "5.2", "category": 5, "name": "Этилен", "formula": "CH₂=CH₂", "note": "Этен"},
+      {"id": "5.3", "category": 5, "name": "Пропилен", "formula": "CH₂=CH–CH₃", "note": "Пропен"},
+      {"id": "5.4", "category": 5, "name": "Ацетилен", "formula": "HC≡CH", "note": "Этин"},
+      {"id": "5.5", "category": 5, "name": "Дивинил", "formula": "CH₂=CH–CH=CH₂", "note": "Бута-1,3-диен"},
+      {"id": "5.6", "category": 5, "name": "Изопрен", "formula": "CH₂=C(CH₃)–CH=CH₂", "note": "2-Метилбута-1,3-диен"},
+      {"id": "5.7", "category": 5, "name": "Изобутилен", "formula": "CH₂=C(CH₃)₂", "note": "2-Метилпропен"},
+      {"id": "5.8", "category": 5, "name": "Изооктан", "formula": "(CH₃)₃C–CH₂–CH(CH₃)–CH₃", "note": "2,2,4-Триметилпентан"},
+      {"id": "5.9", "category": 5, "name": "Стирол", "formula": "C₆H₅–CH=CH₂", "note": "Винилбензол, фенилэтен"},
+      {"id": "5.10", "category": 5, "name": "Толуол", "formula": "C₆H₅–CH₃", "note": "Метилбензол"},
+      {"id": "5.11", "category": 5, "name": "Ксилол", "formula": "C₆H₄(CH₃)₂", "note": "Диметилбензол (о-, м-, п-)"},
+      {"id": "5.12", "category": 5, "name": "Кумол", "formula": "C₆H₅–CH(CH₃)₂", "note": "Изопропилбензол"},
+      {"id": "5.13", "category": 5, "name": "Хлороформ", "formula": "CHCl₃", "note": "Трихлорметан"},
+      {"id": "5.14", "category": 5, "name": "Йодоформ", "formula": "CHI₃", "note": "Трийодметан"},
+      {"id": "5.15", "category": 5, "name": "Фреон-12", "formula": "CCl₂F₂", "note": "Дихлордифторметан"},
+      {"id": "5.16", "category": 5, "name": "Винилхлорид", "formula": "CH₂=CHCl", "note": "Хлорэтен"},
+      {"id": "5.17", "category": 5, "name": "Хлоропрен", "formula": "CH₂=CCl–CH=CH₂", "note": "2-Хлорбута-1,3-диен"},
+      {"id": "5.18", "category": 5, "name": "Тринитротолуол, тротил", "formula": "C₇H₅N₃O₆", "note": "2,4,6-Тринитротолуол"},
+      {"id": "5.19", "category": 5, "name": "Гексахлоран", "formula": "C₆H₆Cl₆", "note": "Гексахлорциклогексан (смесь стереоизомеров)"},
+      {"id": "6.1", "category": 6, "name": "Древесный спирт", "formula": "CH₃OH", "note": "Метанол"},
+      {"id": "6.2", "category": 6, "name": "Винный спирт", "formula": "C₂H₅OH", "note": "Этанол"},
+      {"id": "6.3", "category": 6, "name": "Этиленгликоль", "formula": "HO–CH₂–CH₂–OH", "note": "Этан-1,2-диол"},
+      {"id": "6.4", "category": 6, "name": "Глицерин", "formula": "HO–CH₂–CH(OH)–CH₂–OH", "note": "Пропан-1,2,3-триол"},
+      {"id": "6.5", "category": 6, "name": "Карболовая кислота", "formula": "C₆H₅OH", "note": "Фенол"},
+      {"id": "6.6", "category": 6, "name": "Формальдегид", "formula": "HCHO", "note": "Метаналь"},
+      {"id": "6.7", "category": 6, "name": "Формалин", "formula": "HCHO (водн. р-р)", "note": "Водный раствор формальдегида (обычно около 37%)"},
+      {"id": "6.8", "category": 6, "name": "Ацетальдегид", "formula": "CH₃CHO", "note": "Этаналь"},
+      {"id": "6.9", "category": 6, "name": "Ацетон", "formula": "CH₃COCH₃", "note": "Пропанон"},
+      {"id": "6.10", "category": 6, "name": "Муравьиная кислота", "formula": "HCOOH", "note": "Метановая кислота"},
+      {"id": "6.11", "category": 6, "name": "Уксусная кислота", "formula": "CH₃COOH", "note": "Этановая кислота"},
+      {"id": "6.12", "category": 6, "name": "Масляная кислота", "formula": "CH₃CH₂CH₂COOH", "note": "Бутановая кислота"},
+      {"id": "6.13", "category": 6, "name": "Акриловая кислота", "formula": "CH₂=CHCOOH", "note": "Проп-2-еновая кислота"},
+      {"id": "6.14", "category": 6, "name": "Щавелевая кислота", "formula": "HOOC–COOH", "note": "Этандиовая кислота"},
+      {"id": "6.15", "category": 6, "name": "Янтарная кислота", "formula": "HOOC–CH₂–CH₂–COOH", "note": "Бутандиовая кислота"},
+      {"id": "6.16", "category": 6, "name": "Молочная кислота", "formula": "CH₃–CH(OH)–COOH", "note": "2-Гидроксипропановая кислота"},
+      {"id": "6.17", "category": 6, "name": "Лимонная кислота", "formula": "C₆H₈O₇", "note": "2-Гидроксипропан-1,2,3-трикарбоновая кислота"},
+      {"id": "6.18", "category": 6, "name": "Бензойная кислота", "formula": "C₆H₅COOH", "note": "Бензолкарбоновая кислота"},
+      {"id": "6.19", "category": 6, "name": "Анилин", "formula": "C₆H₅NH₂", "note": "Фениламин, аминобензол"},
+      {"id": "6.20", "category": 6, "name": "Глицин", "formula": "NH₂CH₂COOH", "note": "Аминоуксусная кислота"},
+      {"id": "6.21", "category": 6, "name": "Аланин", "formula": "CH₃CH(NH₂)COOH", "note": "2-Аминопропановая кислота"},
+      {"id": "6.22", "category": 6, "name": "Мочевина, карбамид", "formula": "CO(NH₂)₂", "note": "Диамид угольной кислоты"},
+      {"id": "6.23", "category": 6, "name": "Нитроглицерин", "formula": "C₃H₅(ONO₂)₃", "note": "Тринитрат глицерина"},
+      {"id": "6.24", "category": 6, "name": "Глюкоза", "formula": "C₆H₁₂O₆", "note": "Альдогексоза (обычно D-глюкоза)"},
+      {"id": "6.25", "category": 6, "name": "Фруктоза", "formula": "C₆H₁₂O₆", "note": "Кетогексоза (обычно D-фруктоза)"},
+      {"id": "6.26", "category": 6, "name": "Сахароза, свекловичный сахар", "formula": "C₁₂H₂₂O₁₁", "note": "Дисахарид глюкозы и фруктозы"},
+      {"id": "6.27", "category": 6, "name": "Крахмал", "formula": "(C₆H₁₀O₅)ₙ", "note": "Полисахарид α-глюкозы"},
+      {"id": "6.28", "category": 6, "name": "Целлюлоза", "formula": "(C₆H₁₀O₅)ₙ", "note": "Полисахарид β-глюкозы"},
+      {"id": "7.1", "category": 7, "name": "Полиэтилен", "formula": "(–CH₂–CH₂–)ₙ", "note": "Полимер этена"},
+      {"id": "7.2", "category": 7, "name": "Полипропилен", "formula": "(–CH₂–CH(CH₃)–)ₙ", "note": "Полимер пропена"},
+      {"id": "7.3", "category": 7, "name": "Поливинилхлорид, ПВХ", "formula": "(–CH₂–CHCl–)ₙ", "note": "Полимер хлорэтена"},
+      {"id": "7.4", "category": 7, "name": "Полистирол", "formula": "(–CH₂–CH(C₆H₅)–)ₙ", "note": "Полимер стирола"},
+      {"id": "7.5", "category": 7, "name": "Тефлон, фторопласт-4", "formula": "(–CF₂–CF₂–)ₙ", "note": "Политетрафторэтилен"},
+      {"id": "7.6", "category": 7, "name": "Лавсан, ПЭТ", "formula": "(–O–CH₂–CH₂–O–CO–C₆H₄–CO–)ₙ", "note": "Полиэтилентерефталат"},
+      {"id": "7.7", "category": 7, "name": "Капрон, полиамид-6", "formula": "(–NH–(CH₂)₅–CO–)ₙ", "note": "Полиамид-6"},
+      {"id": "7.8", "category": 7, "name": "Нейлон-6,6", "formula": "(–NH–(CH₂)₆–NH–CO–(CH₂)₄–CO–)ₙ", "note": "Полиамид-6,6"},
+      {"id": "7.9", "category": 7, "name": "Натуральный каучук", "formula": "(C₅H₈)ₙ", "note": "Цис-1,4-полиизопрен"},
+      {"id": "7.10", "category": 7, "name": "Бакелит", "formula": "Полимер", "note": "Фенолформальдегидная смола"}
+    ]
+  }
+  </script>
+  <script>
+    "use strict";
+
+    try {
+      function readSource() {
+        const data = JSON.parse(document.getElementById("source-data").textContent);
+        const hasText = value => typeof value === "string" && value.trim() !== "";
+        if (!Array.isArray(data?.categories) || !data.categories.length || !data.categories.every(hasText)
+            || !Array.isArray(data.cards) || !data.cards.length
+            || !data.cards.every(card => card && Number.isInteger(card.category)
+              && card.category >= 1 && card.category <= data.categories.length
+              && [card.id, card.name, card.formula, card.note].every(hasText))
+            || new Set(data.cards.map(card => card.id)).size !== data.cards.length) {
+          throw new Error("Invalid embedded card data");
+        }
+        return data;
+      }
+
+      const source = readSource();
+      const categories = source.categories.map((name, index) => ({ id: index + 1, name }));
+      const cards = source.cards;
+      const byId = new Map(cards.map(card => [card.id, card]));
+      const allCategories = categories.map(category => category.id);
+      const directions = { name: "Название → формула", formula: "Формула → название", mixed: "Смешанный режим" };
+      const initialSettings = { direction: "name", categories: allCategories, shuffle: false, onlyUnknown: false };
+      const storageKey = "ege-chemistry-trivial-v1";
+      const systemTheme = matchMedia("(prefers-color-scheme: dark)");
+      const wideLayout = matchMedia("(min-width: 820px)");
+      const clues = {
+        "1.10": "Оксид железа(II,III)",
+        "4.9": "Оксид железа(II,III)",
+        "4.10": "Алюминиевая руда",
+        "4.18": "Гидратированные оксиды/оксигидроксиды железа",
+        "6.24": "Альдогексоза",
+        "6.25": "Кетогексоза",
+        "6.27": "Полисахарид α-глюкозы",
+        "6.28": "Полисахарид β-глюкозы",
+        "7.10": "Фенолформальдегидная смола"
+      };
+      const el = id => document.getElementById(id);
+      const form = el("settings-form");
+      const cardButton = el("card");
+      const knownButton = el("known");
+      const reviewButton = el("review");
+      const themes = ["auto", "light", "dark"];
+      const themeNames = { auto: "Авто", light: "Светлая", dark: "Тёмная" };
+      let state = loadState();
+
+      function selectedCards(settings) {
+        return cards.filter(card => settings.categories.includes(card.category)
+          && (!settings.onlyUnknown || state.results[card.id]?.last === "review"));
+      }
+
+      function shuffled(items) {
+        for (let index = items.length - 1; index > 0; index--) {
+          const other = Math.floor(Math.random() * (index + 1));
+          [items[index], items[other]] = [items[other], items[index]];
+        }
+        return items;
+      }
+
+      function makeSession(settings, retryItems = null) {
+        let items;
+        if (retryItems) {
+          items = [...retryItems];
+          if (settings.shuffle) shuffled(items);
+        } else {
+          items = selectedCards(settings).map(card => ({ id: card.id }));
+          if (settings.shuffle) shuffled(items);
+          // Alternate both directions in mixed mode, randomizing the starting direction.
+          const offset = settings.direction === "mixed" && Math.random() < .5 ? 1 : 0;
+          items.forEach((item, index) => {
+            item.direction = settings.direction === "mixed"
+              ? ((index + offset) % 2 ? "formula" : "name")
+              : settings.direction;
+          });
+        }
+        return { items, history: [], revealed: false, retry: Boolean(retryItems) };
+      }
+
+      function loadState() {
+        try {
+          const saved = JSON.parse(localStorage.getItem(storageKey));
+          if (saved?.version === 1 && saved.results && saved.settings
+              && typeof saved.results === "object" && !Array.isArray(saved.results)
+              && ["name", "formula", "mixed"].includes(saved.settings.direction)
+              && Array.isArray(saved.settings.categories) && saved.settings.categories.length
+              && saved.settings.categories.every(category => allCategories.includes(category))
+              && Array.isArray(saved.session?.items) && Array.isArray(saved.session.history)
+              && saved.session.items.every(item => item && byId.has(item.id) && (item.direction === "name" || item.direction === "formula"))
+              && saved.session.history.length <= saved.session.items.length
+              && saved.session.history.every(entry => entry && (entry.grade === "known" || entry.grade === "review"))) {
+            return saved;
+          }
+        } catch {
+          return { version: 1, settings: initialSettings, results: {}, session: null, theme: "auto" };
+        }
+        return { version: 1, settings: initialSettings, results: {}, session: null, theme: "auto" };
+      }
+
+      function save() {
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(state));
+          el("storage-status").textContent = "Прогресс сохраняется в этом браузере";
+        } catch {
+          el("storage-status").textContent = "Хранилище недоступно. Прогресс сохранится до закрытия страницы.";
+        }
+      }
+
+      function applyTheme() {
+        const color = state.theme === "auto" ? (systemTheme.matches ? "dark" : "light") : state.theme;
+        document.documentElement.dataset.color = color;
+        document.querySelector('meta[name="theme-color"]').content = color === "dark" ? "#12201b" : "#f3f4ee";
+        el("theme-label").textContent = themeNames[state.theme];
+        el("theme").setAttribute("aria-label", "Тема. " + themeNames[state.theme] + ". Сменить тему.");
+      }
+
+      function makeFilterOptions() {
+        for (const category of categories) {
+          const label = document.createElement("label");
+          const box = document.createElement("input");
+          box.type = "checkbox";
+          box.name = "category";
+          box.value = category.id;
+          const title = document.createElement("span");
+          title.className = "section-name";
+          title.textContent = category.name;
+          const count = document.createElement("span");
+          count.className = "section-count";
+          count.setAttribute("aria-hidden", "true");
+          count.textContent = cards.filter(card => card.category === category.id).length;
+          label.append(box, title, count);
+          el("category-options").append(label);
+        }
+      }
+
+      function formSettings() {
+        return {
+          direction: form.elements.direction.value,
+          categories: Array.from(form.querySelectorAll('input[name="category"]:checked'), box => Number(box.value)),
+          shuffle: el("shuffle").checked,
+          onlyUnknown: el("only-unknown").checked
+        };
+      }
+
+      function setForm() {
+        form.elements.direction.value = state.settings.direction;
+        el("shuffle").checked = state.settings.shuffle;
+        el("only-unknown").checked = state.settings.onlyUnknown;
+        for (const box of form.querySelectorAll('input[name="category"]')) {
+          box.checked = state.settings.categories.includes(Number(box.value));
+        }
+        updatePreview();
+      }
+
+      function updatePreview() {
+        const settings = formSettings();
+        el("deck-count").textContent = selectedCards(settings).length;
+        el("apply").disabled = settings.categories.length === 0;
+        el("select-all").textContent = settings.categories.length === categories.length ? "Снять выбор" : "Выбрать все";
+      }
+
+      function putValue(target, value, formula) {
+        target.classList.toggle("is-formula", formula);
+        target.classList.toggle("is-long-formula", formula && value.length > 12);
+        target.textContent = "";
+        if (!formula) {
+          target.textContent = value;
+          return;
+        }
+        // Unicode preserves the source indices. Add optional breaks after chemical bonds and hydrate dots.
+        for (const piece of value.split(/(–|·|=|≡)/)) {
+          if (piece) target.append(piece);
+          if (/^[–·=≡]$/.test(piece)) target.append(document.createElement("wbr"));
+        }
+      }
+
+      function setRevealed(revealed, animate) {
+        const face = el("front");
+        const reverse = el("reverse");
+        cardButton.classList.toggle("is-animated", animate);
+        cardButton.classList.toggle("is-open", revealed);
+        cardButton.setAttribute("aria-pressed", String(revealed));
+        // Hidden face is display:none via CSS; no inert dependency needed.
+        face.setAttribute("aria-hidden", String(revealed));
+        reverse.setAttribute("aria-hidden", String(!revealed));
+        knownButton.disabled = !revealed;
+        reviewButton.disabled = !revealed;
+        const text = revealed
+          ? ["К вопросу.", el("answer").textContent, el("note").textContent]
+          : ["Показать ответ.", el("question").textContent, el("clue").textContent];
+        cardButton.setAttribute("aria-label", text.filter(Boolean).join(" "));
+      }
+
+      function render() {
+        const { session } = state;
+        const total = session.items.length;
+        const done = session.history.length;
+        const correct = session.history.filter(entry => entry.grade === "known").length;
+        const incorrect = done - correct;
+        const item = session.items[done];
+        el("position").textContent = total ? Math.min(done + 1, total) + " / " + total : "0 / 0";
+        el("correct").textContent = correct;
+        el("incorrect").textContent = incorrect;
+        el("progress-bar").max = total || 1;
+        el("progress-bar").value = done;
+        el("back").disabled = done === 0;
+        el("active").hidden = !item;
+        el("complete").hidden = !total || Boolean(item);
+        el("empty").hidden = total > 0;
+        const deckInfo = [directions[state.settings.direction]];
+        if (session.retry) deckInfo.push("Повтор ошибок");
+        else if (state.settings.onlyUnknown) deckInfo.push("Только «Не знаю»");
+        el("deck-label").textContent = deckInfo.join(" · ");
+
+        if (!item) {
+          if (total) {
+            el("summary").textContent = "«Знаю» — " + correct + " из " + total + " (" + Math.round(100 * correct / total)
+              + " %). На повторение — " + incorrect + ".";
+            el("errors").hidden = incorrect === 0;
+            el("announcement").textContent = "Колода пройдена. " + el("summary").textContent;
+          } else {
+            el("empty-copy").textContent = "В выбранных разделах нет карточек с последней оценкой «Повторить».";
+            el("announcement").textContent = el("empty-copy").textContent;
+          }
+          return;
+        }
+
+        const card = byId.get(item.id);
+        const category = categories[card.category - 1];
+        const askFormula = item.direction === "name";
+        el("category-front").textContent = category.name;
+        el("category-back").textContent = category.name;
+        el("direction-front").textContent = askFormula ? "Назовите формулу" : "Вспомните название";
+        putValue(el("question"), askFormula ? card.name : card.formula, !askFormula);
+        putValue(el("answer"), askFormula ? card.formula : card.name, askFormula);
+        putValue(el("reference"), askFormula ? card.name : card.formula, !askFormula);
+        el("note").textContent = card.note;
+        const clue = askFormula ? "" : clues[item.id] || "";
+        el("clue").textContent = clue;
+        el("clue").hidden = !clue;
+        setRevealed(session.revealed, false);
+        el("announcement").textContent = "Карточка " + (done + 1) + " из " + total + ". " + el("direction-front").textContent + ".";
+      }
+
+      function focusStudy(preventScroll) {
+        let target = cardButton;
+        if (!el("complete").hidden) target = el("errors").hidden ? el("restart") : el("errors");
+        if (!el("empty").hidden) target = el("show-all");
+        try { target.focus({ preventScroll }); } catch (error) { target.focus(); }
+      }
+
+      function rate(grade) {
+        const { session } = state;
+        const item = session.items[session.history.length];
+        if (!item || !session.revealed) return;
+        const previous = state.results[item.id] || null;
+        const next = { known: 0, review: 0, ...previous, last: grade };
+        next[grade]++;
+        state.results[item.id] = next;
+        session.history.push({ grade, previous });
+        session.revealed = false;
+        save();
+        render();
+        updatePreview();
+        focusStudy(true);
+      }
+
+      function begin(settings, retryItems) {
+        state.settings = settings;
+        state.session = makeSession(settings, retryItems);
+        setForm();
+        save();
+        render();
+      }
+
+      makeFilterOptions();
+      el("catalog-count").textContent = cards.length + " карточек · " + categories.length + " тематических разделов";
+      el("settings").open = wideLayout.matches;
+      setForm();
+      applyTheme();
+      if (typeof systemTheme.addEventListener === "function") {
+        systemTheme.addEventListener("change", applyTheme);
+      } else if (typeof systemTheme.addListener === "function") {
+        systemTheme.addListener(applyTheme);
+      }
+      if (!state.session) state.session = makeSession(state.settings);
+      save();
+      render();
+
+      el("theme").addEventListener("click", () => {
+        state.theme = themes[(themes.indexOf(state.theme) + 1) % themes.length];
+        applyTheme();
+        save();
+      });
+      form.addEventListener("change", updatePreview);
+      form.addEventListener("submit", event => {
+        event.preventDefault();
+        const settings = formSettings();
+        if (!settings.categories.length) return;
+        if (!wideLayout.matches) el("settings").open = false;
+        begin(settings);
+        focusStudy(false);
+      });
+      el("select-all").addEventListener("click", () => {
+        const boxes = [...form.querySelectorAll('input[name="category"]')];
+        const select = boxes.some(box => !box.checked);
+        boxes.forEach(box => { box.checked = select; });
+        updatePreview();
+      });
+      cardButton.addEventListener("click", () => {
+        state.session.revealed = !state.session.revealed;
+        setRevealed(state.session.revealed, true);
+        el("announcement").textContent = state.session.revealed
+          ? el("answer").textContent + ". " + el("note").textContent
+          : el("direction-front").textContent + ". " + el("question").textContent;
+        save();
+      });
+      knownButton.addEventListener("click", () => rate("known"));
+      reviewButton.addEventListener("click", () => rate("review"));
+      el("back").addEventListener("click", () => {
+        const { session } = state;
+        if (!session.history.length) return;
+        const { previous } = session.history.pop();
+        const { id } = session.items[session.history.length];
+        if (previous) state.results[id] = previous;
+        else delete state.results[id];
+        session.revealed = false;
+        save();
+        render();
+        updatePreview();
+        focusStudy(true);
+      });
+      el("errors").addEventListener("click", () => {
+        const { items, history } = state.session;
+        begin(state.settings, items.filter((item, index) => history[index].grade === "review"));
+        focusStudy(true);
+      });
+      el("restart").addEventListener("click", () => {
+        begin(state.settings);
+        focusStudy(true);
+      });
+      el("show-all").addEventListener("click", () => {
+        begin({ ...state.settings, categories: allCategories, onlyUnknown: false });
+        focusStudy(true);
+      });
+      el("reset").addEventListener("click", () => {
+        if (!confirm("Удалить все оценки и начать колоду заново?")) return;
+        state.results = {};
+        begin({ ...state.settings, onlyUnknown: false });
+        focusStudy(true);
+      });
+      window.addEventListener("storage", event => {
+        if (event.key !== storageKey || !event.newValue) return;
+        const updated = loadState();
+        if (!updated.session) return;
+        state = updated;
+        setForm();
+        applyTheme();
+        render();
+      });
+
+      el("startup-error").hidden = true;
+      el("trainer").hidden = false;
+      el("theme").disabled = false;
+
+      // Optional same-origin cache for the hosted copy. The loaded page works independently.
+      if (window.isSecureContext && location.protocol !== "file:") {
+        try {
+          const worker = navigator.serviceWorker;
+          if (worker) {
+            const scriptUrl = new URL("./sw.js", location.href).href;
+            function showOfflineStatus() {
+              el("offline-status").hidden = worker.controller?.scriptURL !== scriptUrl;
+            }
+            showOfflineStatus();
+            worker.addEventListener("controllerchange", showOfflineStatus);
+            worker.register(scriptUrl).catch(() => {});
+          }
+        } catch {
+          // Cache access may be disabled by browser settings.
+        }
+      }
+    } catch (error) {
+      console.error("Не удалось запустить тренажёр.", error);
+    }
+  </script>
+</body>
+</html>
